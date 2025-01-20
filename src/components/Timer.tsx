@@ -44,9 +44,9 @@ export const Timer: React.FC<TimerProps> = ({ onTimeUpdate }) => {
   };
 
   return (
-    <Card className="p-6 bg-secondary">
+    <Card className="p-6 bg-[#FFDEE2]">
       <div className="text-center">
-        <div className="text-4xl font-mono mb-4">{formatTime(seconds)}</div>
+        <div className="text-4xl font-mono mb-4 text-gray-800">{formatTime(seconds)}</div>
         <div className="flex justify-center space-x-4">
           <Button
             variant={isRunning ? "destructive" : "default"}
