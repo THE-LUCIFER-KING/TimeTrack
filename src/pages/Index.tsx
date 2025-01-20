@@ -5,7 +5,7 @@ import { Task } from "@/types/task";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -71,15 +71,13 @@ const Index = () => {
     });
   };
 
-  const handleTaskReschedule = (taskId: string) => {
+  const handleTaskReschedule = (taskId: string, newDate: Date) => {
     setTasks(
       tasks.map((task) =>
         task.id === taskId
           ? {
               ...task,
-              dueDate: new Date(
-                new Date().setDate(new Date().getDate() + 1)
-              ),
+              dueDate: newDate,
             }
           : task
       )
@@ -87,7 +85,7 @@ const Index = () => {
     
     toast({
       title: "Task Rescheduled",
-      description: "Task moved to tomorrow",
+      description: `Task moved to ${format(newDate, "PPP")}`,
     });
   };
 

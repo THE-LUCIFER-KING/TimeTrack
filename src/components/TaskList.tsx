@@ -4,12 +4,18 @@ import { Card } from "@/components/ui/card";
 import { CheckCircle2, XCircle, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 interface TaskListProps {
   tasks: Task[];
   onTaskComplete: (taskId: string) => void;
   onTaskFail: (taskId: string) => void;
-  onTaskReschedule: (taskId: string) => void;
+  onTaskReschedule: (taskId: string, newDate: Date) => void;
 }
 
 export const TaskList: React.FC<TaskListProps> = ({
@@ -64,14 +70,29 @@ export const TaskList: React.FC<TaskListProps> = ({
               >
                 <XCircle className="h-5 w-5" />
               </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => onTaskReschedule(task.id)}
-                className="hover:text-warning"
-              >
-                <ArrowRight className="h-5 w-5" />
-              </Button>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="hover:text-warning"
+                  >
+                    <ArrowRight className="h-5 w-5" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="end">
+                  <Calendar
+                    mode="single"
+                    selected={task.dueDate}
+                    onSelect={(date) => {
+                      if (date) {
+                        onTaskReschedule(task.id, date);
+                      }
+                    }}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
         </Card>
