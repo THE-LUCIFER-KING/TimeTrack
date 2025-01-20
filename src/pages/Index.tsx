@@ -40,21 +40,38 @@ const Index = () => {
   const handleTaskComplete = (taskId: string) => {
     setTasks(
       tasks.map((task) =>
-        task.id === taskId ? { ...task, status: "completed" } : task
+        task.id === taskId 
+          ? { ...task, status: task.status === "completed" ? "pending" : "completed" }
+          : task
       )
     );
+    
+    const task = tasks.find(t => t.id === taskId);
+    const newStatus = task?.status === "completed" ? "pending" : "completed";
+    toast({
+      title: "Status Updated",
+      description: `Task marked as ${newStatus}`,
+    });
   };
 
   const handleTaskFail = (taskId: string) => {
     setTasks(
       tasks.map((task) =>
-        task.id === taskId ? { ...task, status: "failed" } : task
+        task.id === taskId 
+          ? { ...task, status: task.status === "failed" ? "pending" : "failed" }
+          : task
       )
     );
+    
+    const task = tasks.find(t => t.id === taskId);
+    const newStatus = task?.status === "failed" ? "pending" : "failed";
+    toast({
+      title: "Status Updated",
+      description: `Task marked as ${newStatus}`,
+    });
   };
 
   const handleTaskReschedule = (taskId: string) => {
-    // For now, just reschedule to tomorrow
     setTasks(
       tasks.map((task) =>
         task.id === taskId
@@ -67,6 +84,11 @@ const Index = () => {
           : task
       )
     );
+    
+    toast({
+      title: "Task Rescheduled",
+      description: "Task moved to tomorrow",
+    });
   };
 
   return (

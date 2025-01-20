@@ -38,6 +38,9 @@ export const TaskList: React.FC<TaskListProps> = ({
                 <p className="text-sm text-muted-foreground">
                   Due: {format(task.dueDate, "PPP")}
                 </p>
+                <p className="text-xs text-muted-foreground">
+                  Status: {task.status}
+                </p>
               </div>
             </div>
             <div className="flex items-center space-x-2">
@@ -45,7 +48,9 @@ export const TaskList: React.FC<TaskListProps> = ({
                 variant="ghost"
                 size="icon"
                 onClick={() => onTaskComplete(task.id)}
-                className="hover:text-success"
+                className={`hover:text-success ${
+                  task.status === "completed" ? "text-success" : ""
+                }`}
               >
                 <CheckCircle2 className="h-5 w-5" />
               </Button>
@@ -53,7 +58,9 @@ export const TaskList: React.FC<TaskListProps> = ({
                 variant="ghost"
                 size="icon"
                 onClick={() => onTaskFail(task.id)}
-                className="hover:text-destructive"
+                className={`hover:text-destructive ${
+                  task.status === "failed" ? "text-destructive" : ""
+                }`}
               >
                 <XCircle className="h-5 w-5" />
               </Button>
