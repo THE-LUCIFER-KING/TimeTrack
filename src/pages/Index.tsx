@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
+import { format } from "date-fns";
 
 const Index = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
