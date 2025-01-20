@@ -26,3 +26,8 @@ This project is built with .
 
 ## How to access and view this project:-
 https://timetrack.lovable.app
+
+##SCREENSHOTS
+![image](https://github.com/user-attachments/assets/324df7ef-3b6c-4018-aeca-1a92dc28512d)
+![image](https://github.com/user-attachments/assets/2944d6c8-48ac-47a4-9656-57433c9c0206)
+
